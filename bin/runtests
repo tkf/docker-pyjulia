@@ -2,9 +2,17 @@
 JULIA_VERSION="${JULIA_VERSION:-1.0}"
 
 set -ex
+
 docker image build -t "pyjulia/base-$JULIA_VERSION" \
     --build-arg julia_version="$JULIA_VERSION" \
     base
-docker image build -t "pyjulia/plain-$JULIA_VERSION" plain
-docker image build -t "pyjulia/test-$JULIA_VERSION" test
+
+docker image build -t "pyjulia/plain-$JULIA_VERSION" \
+    --build-arg from="pyjulia/base-$JULIA_VERSION" \
+    plain
+
+docker image build -t "pyjulia/test-$JULIA_VERSION" \
+    --build-arg from="pyjulia/plain-$JULIA_VERSION" \
+    test
+
 docker run --rm -it "pyjulia/test-$JULIA_VERSION" python -m julia.runtests
