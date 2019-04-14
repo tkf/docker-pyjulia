@@ -5,3 +5,4 @@ FROM $from
 # https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
 
 RUN pip install --upgrade --extra-index-url https://test.pypi.org/simple/ --pre 'julia[test]'
+RUN pip install --upgrade 'https://github.com/tkf/pyjulia/archive/log-version.zip#egg=julia'
