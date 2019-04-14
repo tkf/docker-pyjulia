@@ -1,0 +1,10 @@
+language: generic
+
+services:
+  - docker
+
+script:
+  - bin/runtests
+
+notifications:
+  email: false
