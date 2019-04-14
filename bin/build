@@ -14,5 +14,3 @@ docker image build -t "pyjulia/plain-$JULIA_VERSION" \
 docker image build -t "pyjulia/test-$JULIA_VERSION" \
     --build-arg from="pyjulia/plain-$JULIA_VERSION" \
     test
-
-docker run --rm -it "pyjulia/test-$JULIA_VERSION" python -m julia.runtests
