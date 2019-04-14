@@ -1,0 +1,16 @@
+#!/bin/bash
+
+VERSION="$1"
+
+if [ -z "$VERSION" ]
+then
+    echo "Usage: $0 PYJULIA_VERSION" >&2
+    exit 2
+fi
+
+set -ex
+bin/assert-repo-clean
+
+git checkout -b "test/v$VERSION"
+sed -i -E "s/(julia\[test\])/\1==$VERSION/g" test/Dockerfile
+git commit --all --message "Test with PyJulia $VERSION"
