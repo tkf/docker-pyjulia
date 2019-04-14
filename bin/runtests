@@ -1,6 +1,6 @@
 #!/bin/bash
 set -ex
 docker image build -t pyjulia/base base
-docker image build -t pyjulia/palin plain
+docker image build -t pyjulia/plain plain
 docker image build -t pyjulia/test test
 docker run --rm -it pyjulia/test python -m julia.runtests
