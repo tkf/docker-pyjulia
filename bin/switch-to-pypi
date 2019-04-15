@@ -1,0 +1,6 @@
+#!/bin/bash
+set -ex
+bin/assert-repo-clean
+
+sed -i -E '/--extra-index-url/d' bin/build
+git commit --all --message "Install everything from pypi.org"
