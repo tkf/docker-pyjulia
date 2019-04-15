@@ -8,9 +8,13 @@ then
     exit 2
 fi
 
+arg_pyjulia_spec='--build-arg pyjulia_spec="julia[test]=='$VERSION'" \\'
+arg_pip_options='--build-arg pip_options="--extra-index-url https://test.pypi.org/simple/ --pre" \\'
+
 set -ex
 bin/assert-repo-clean
 
 git checkout -b "test/v$VERSION"
-sed -i -E "s/(julia\[test\])/\1==$VERSION/g" test/Dockerfile
+sed -i -E 's#^( +)test$#\1'"$arg_pip_options"'\n\1'"$arg_pyjulia_spec"'\n\0#g' \
+    bin/build
 git commit --all --message "Test with PyJulia $VERSION"
