@@ -13,6 +13,5 @@ docker image build -t "pyjulia/plain-$JULIA_VERSION" \
 
 docker image build -t "pyjulia/test-$JULIA_VERSION" \
     --build-arg from="pyjulia/plain-$JULIA_VERSION" \
-    --build-arg pip_options="--extra-index-url https://test.pypi.org/simple/ --pre" \
     --build-arg pyjulia_spec="julia[test]==0.4.1" \
     test
